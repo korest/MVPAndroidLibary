@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * Created by orest.kyrylchuk on 18.09.2015.
  */
-public abstract class BasePresenter<PV extends PresenterView> {
+public abstract class BasePresenter<PV> {
 
     protected PV presenterView;
 
@@ -18,6 +18,6 @@ public abstract class BasePresenter<PV extends PresenterView> {
     }
 
     protected void onDestroy() {
-        // do some custom stuff here
+        // do some clean up here
     }
 }

@@ -1,6 +1,7 @@
 package com.mvp.presenter;
 
-import com.korest.mvp.BasePresenter;
+import android.util.Log;
+
 import com.mvp.presenter.view.ExamplePresenterView;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ import rx.schedulers.Schedulers;
 public class ExamplePresenter extends BaseRxPresenter<ExamplePresenterView> {
 
     public void doSomeStuff() {
-        compositeSubscription.add(Observable.from(Arrays.asList("Hello world !!!"))
+        registerSubscription(Observable.from(Arrays.asList("Hello world !!!"))
                 .delay(3, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -34,7 +35,11 @@ public class ExamplePresenter extends BaseRxPresenter<ExamplePresenterView> {
 
                     @Override
                     public void onNext(String s) {
-                        presenterView.showToast(s);
+                        if(presenterView != null) {
+                            presenterView.showToast(s);
+                        } else {
+                            Log.e("TAG", "presenter view is null");
+                        }
                     }
                 }));
     }

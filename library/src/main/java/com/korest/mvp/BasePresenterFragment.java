@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by orest.kyrylchuk on 18.09.2015.
  */
-public abstract class BasePresenterFragment<PR extends BasePresenter<PV>, PV extends PresenterView> extends Fragment {
+public abstract class BasePresenterFragment<PR extends BasePresenter<PV>, PV> extends Fragment {
 
     private static final String FRAGMENT_ID = "fragment_id";
     private static final AtomicLong ID = new AtomicLong();
@@ -25,7 +25,7 @@ public abstract class BasePresenterFragment<PR extends BasePresenter<PV>, PV ext
     protected boolean willBeRestored;
 
     // presenter field
-    protected PR presenter;
+    protected final PR presenter;
 
     public BasePresenterFragment() {
         final Class<PR> presenterClass = (Class<PR>) ((ParameterizedType)getClass()
